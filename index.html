@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Христина Терлецька - IT Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --bg-color: #f9fafb;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            overflow-x: hidden;
+        }
+
+        /* Навігація */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero секція */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.05"><path d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/></g></g></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: var(--primary-color);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Секції */
+        section {
+            padding: 5rem 0;
+            width: 100%;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 0 auto 3rem auto;
+            position: relative;
+            color: var(--text-color);
+            width: 100%;
+            display: block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* Про мене */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+            border-radius: 20px;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Стиль для випадку, якщо фото не завантажилось */
+        .about-image::before {
+            content: '📷';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4b5563;
+        }
+
+        /* Enhanced Statistics Section */
+        .stats-section {
+            position: relative;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #4f46e5 100%);
+            padding: 6rem 2rem;
+            margin: 5rem 0;
+            overflow: hidden;
+        }
+
+        /* Animated background elements */
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            animation: stats-float 20s ease-in-out infinite;
+        }
+
+        .stats-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><circle cx="30" cy="30" r="4"/></g></g></svg>') repeat;
+            animation: drift 30s linear infinite;
+        }
+
+        @keyframes stats-float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+        }
+
+        @keyframes drift {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(-60px) translateY(-60px); }
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .stats-title {
+            text-align: center !important;
+            color: white !important;
+            font-size: 2.5rem !important;
+            font-weight: 700 !important;
+            margin: 0 auto 3rem auto !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+            opacity: 0;
+            animation: stats-fadeInUp 1s ease 0.2s forwards;
+            width: 100% !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            padding: 0 !important;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: stats-slideInUp 0.8s ease forwards;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 0.3s; }
+        .stat-item:nth-child(2) { animation-delay: 0.4s; }
+        .stat-item:nth-child(3) { animation-delay: 0.5s; }
+        .stat-item:nth-child(4) { animation-delay: 0.6s; }
+
+        .stat-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .stat-item:hover::before {
+            left: 100%;
+        }
+
+        .stat-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.6s ease;
+        }
+
+        .stat-item:hover .stat-icon::after {
+            width: 100px;
+            height: 100px;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            line-height: 1;
+        }
+
+        .stat-number::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 2px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-item:hover .stat-number::after {
+            opacity: 1;
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .stat-description {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.5rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover .stat-description {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Pulse animation for numbers */
+        .stat-number.counting {
+            animation: pulse 0.1s ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes stats-fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes stats-slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Particle animation */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float-particle 15s infinite linear;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 6s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 8s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 10s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 12s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 14s; }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Timeline для досвіду */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: var(--primary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            padding: 0 2rem;
+        }
+
+        .timeline-item:nth-child(odd) {
+            text-align: right;
+            padding-right: 50%;
+        }
+
+        .timeline-item:nth-child(even) {
+            text-align: left;
+            padding-left: 50%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 4px solid var(--bg-color);
+        }
+
+        .timeline-content {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .timeline-spacer {
+            flex-grow: 1;
+        }
+
+        .timeline-date {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-content ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        /* Навички */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .skill-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .skill-level {
+            margin-top: 0.5rem;
+            height: 6px;
+            background-color: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 3px;
+            transition: width 1s ease;
+        }
+
+        /* Проєкти */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .project-icon {
+            font-size: 4rem;
+            color: white;
+            z-index: 2;
+            animation: float-icon 3s ease-in-out infinite;
+        }
+
+        @keyframes float-icon {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .project-description {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background-color: #e0e7ff;
+            color: var(--primary-color);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Контакти */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background-color: #ffffff;
+            color: #1f2937 !important;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: white;
+            color: var(--text-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .submit-btn:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Соціальні мережі */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: var(--bg-color);
+            border-radius: 50%;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-color);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 5rem;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .scroll-indicator span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: white;
+            opacity: 0.5;
+            animation: bounce 1.5s infinite;
+        }
+
+        .scroll-indicator span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .scroll-indicator span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(10px);
+                opacity: 1;
+            }
+        }
+
+        /* Анімації при скролі */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Glitch ефект для заголовка */
+        .glitch {
+            position: relative;
+            color: white;
+            font-size: 3.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                        -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+                        0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            animation: glitch 500ms infinite;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            animation: glitch-1 0.5s infinite;
+            color: #00ffff;
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitch-2 0.5s infinite;
+            color: #ff00ff;
+            z-index: -2;
+        }
+
+        @keyframes glitch {
+            0%, 100% {
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                            -0.05em -0.025em 0 rgba(0, 255, 0, 0.75),
+                            0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+            50% {
+                text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+                            0.05em 0.025em 0 rgba(0, 255, 0, 0.75),
+                            -0.025em -0.05em 0 rgba(0, 0, 255, 0.75);
+            }
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% {
+                clip: rect(42px, 9999px, 44px, 0);
+                transform: skew(0.5deg);
+            }
+            50% {
+                clip: rect(12px, 9999px, 59px, 0);
+                transform: skew(0.5deg);
+            }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% {
+                clip: rect(12px, 9999px, 78px, 0);
+                transform: skew(0.5deg);
+            }
+            50% {
+                clip: rect(35px, 9999px, 39px, 0);
+                transform: skew(0.5deg);
+            }
+        }
+
+        /* Typing animation */
+        .typing {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid white;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: white }
+        }
+
+        /* Адаптивність */
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                max-width: 400px;
+            }
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                padding-left: 60px;
+                padding-right: 0;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                text-align: left;
+                padding-left: 60px;
+                padding-right: 2rem;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .mobile-menu.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .mobile-menu.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .mobile-menu.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .contact-container {
+                padding: 2rem;
+            }
+
+            .stats-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+                max-width: 600px;
+            }
+            
+            .stat-item {
+                padding: 2rem 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 3rem;
+            }
+            
+            .stat-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+        }
+
+        /* Темна тема */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-color: #f9fafb;
+                --bg-color: #111827;
+                --card-bg: #1f2937;
+                --border-color: #374151;
+            }
+
+            nav {
+                background: rgba(17, 24, 39, 0.95);
+            }
+
+            .tech-tag {
+                background-color: #312e81;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                background-color: #1f2937;
+                color: #f9fafb !important;
+                border-color: #374151;
+            }
+
+            .form-group input:focus,
+            .form-group textarea:focus {
+                background-color: #111827;
+                color: #f9fafb !important;
+            }
+
+            .social-link {
+                background-color: var(--card-bg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навігація -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo">Portfolio</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero секція -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="glitch" data-text="Христина Терлецька">Христина Терлецька</h1>
+            <p class="subtitle typing">Senior Backend Engineer | Distributed Systems</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            </div>
+            <div class="scroll-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Про мене -->
+    <section id="about" class="fade-in">
+        <div class="section-container">
+            <h2 class="section-title">Про мене</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="your-photo.jpg" alt="Христина Терлецька - Senior Backend Engineer">
+                </div>
+                <div class="about-text">
+                    <p>As a software engineer, I develop distributed systems and tackle complex technical challenges with scalable solutions. My work focuses on architecting fault-tolerant Kafka-based ETL pipelines, implementing high-throughput APIs for complex computations, and orchestrating distributed systems across multiple data centers.</p>
+                    <p>I'm involved in the full project lifecycle, from initial system architecture to production deployment and ongoing support. Taking ownership of critical components and adapting to evolving requirements in dynamic environments. Passionate about mentoring colleagues and fostering knowledge sharing within the team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Statistics Section -->
+    <section class="stats-section">
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        
+        <div class="stats-container">
+            <div style="width: 100%; text-align: center; margin-bottom: 3rem;">
+                <h2 style="color: white; font-size: 2.5rem; font-weight: 700; margin: 0 auto; text-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: center; display: block; width: 100%; padding: 0; opacity: 0; animation: stats-fadeInUp 1s ease 0.2s forwards;">Key Achievements</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-number" data-target="7">0</div>
+                    <div class="stat-label">Years of Experience</div>
+                    <div class="stat-description">Building scalable distributed systems</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">🏢</div>
+                    <div class="stat-number" data-target="5">0</div>
+                    <div class="stat-label">Companies</div>
+                    <div class="stat-description">From startups to Fortune 500</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-number" data-target="3">0</div>
+                    <div class="stat-label">Million Active Users</div>
+                    <div class="stat-description">Serving global audiences</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-number" data-target="200">0</div>
+                    <div class="stat-label">Billion $ Assets Managed</div>
+                    <div class="stat-description">Enterprise-grade platforms</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="fade-in">
+        <div class="section-container">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Mar 2025 - Present</div>
+                    <h3>Senior Software Engineer</h3>
+                    <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Datadog</h4>
+                    <p style="font-style: italic; color: #6b7280; margin-bottom: 1rem;">New York, United States</p>
+                    <p>Building next-generation monitoring and observability solutions for cloud-scale infrastructure.</p>
+                    <div class="timeline-spacer"></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Jan 2025 - Mar 2025</div>
+                    <h3>Lead Software Engineer</h3>
+                    <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">DraftKings Inc.</h4>
+                    <p style="font-style: italic; color: #6b7280; margin-bottom: 1rem;">Remote • 3 months</p>
+                    <p>Led development of high-performance betting solutions and mentored engineering teams.</p>
+                    <div class="timeline-spacer"></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Feb 2022 - Jan 2025</div>
+                    <h3>Senior Software Engineer</h3>
+                    <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">DraftKings Inc.</h4>
+                    <p style="font-style: italic; color: #6b7280; margin-bottom: 1rem;">Remote • 3 years</p>
+                    <ul style="text-align: left; margin-top: 1rem; color: #6b7280; font-size: 0.95rem;">
+                        <li>Developed scalable solutions handling millions of concurrent users</li>
+                        <li>Optimized ETL systems reducing memory usage by 40%</li>
+                        <li>Mentored team members and collaborated with product owners</li>
+                        <li>Provided 24/7 on-call support for critical systems</li>
+                    </ul>
+                    <div class="project-tech" style="margin-top: 1rem;">
+                        <span class="tech-tag">.NET</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Kafka</span>
+                        <span class="tech-tag">Redis</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Mar 2021 - Jan 2022</div>
+                    <h3>Software Engineer</h3>
+                    <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">DraftKings Inc.</h4>
+                    <p style="font-style: italic; color: #6b7280; margin-bottom: 1rem;">Remote • 11 months</p>
+                    <p>Implemented real-time sports betting features and improved system reliability.</p>
+                    <div class="timeline-spacer"></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Jun 2020 - Mar 2021</div>
+                    <h3>Software Engineer</h3>
+                    <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Parimatch Tech</h4>
+                    <p style="font-style: italic; color: #6b7280; margin-bottom: 1rem;">Ukraine • 10 months</p>
+                    <p>Developed sportsbook solutions with proprietary trading and data services.</p>
+                    <div class="project-tech" style="margin-top: 1rem;">
+                        <span class="tech-tag">DDD</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">RabbitMQ</span>
+                    </div>
+                    <div class="timeline-spacer"></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Jan 2019 - Jun 2020</div>
+                    <h3>Software Engineer</h3>
+                    <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">ELEKS</h4>
+                    <p style="font-style: italic; color: #6b7280; margin-bottom: 1rem;">Ukraine • 1 year 6 months</p>
+                    <p>Built SaaS wealthtech platform managing $200B+ in assets for 1000+ financial firms.</p>
+                    <div class="project-tech" style="margin-top: 1rem;">
+                        <span class="tech-tag">Distributed Cache</span>
+                        <span class="tech-tag">Azure</span>
+                        <span class="tech-tag">Angular</span>
+                    </div>
+                    <div class="timeline-spacer"></div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">Nov 2017 - Jan 2019</div>
+                    <h3>Software Engineer</h3>
+                    <h4 style="color: var(--primary-color); margin-bottom: 0.5rem;">Deloitte</h4>
+                    <p style="font-style: italic; color: #6b7280; margin-bottom: 1rem;">Ukraine • 1 year 3 months</p>
+                    <p>Developed big data solutions and analytics platforms for enterprise clients.</p>
+                    <div class="project-tech" style="margin-top: 1rem;">
+                        <span class="tech-tag">Apache Spark</span>
+                        <span class="tech-tag">Cassandra</span>
+                        <span class="tech-tag">Hadoop</span>
+                    </div>
+                    <div class="timeline-spacer"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Навички -->
+    <section id="skills" class="fade-in">
+        <div class="section-container">
+            <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">⚡</div>
+                <div class="skill-name">C#</div>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 95%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🐍</div>
+                <div class="skill-name">Python</div>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 90%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">💻</div>
+                <div class="skill-name">TypeScript/JS</div>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 88%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">⚛️</div>
+                <div class="skill-name">React/Angular</div>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 85%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🎯</div>
+                <div class="skill-name">ASP.NET Core</div>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 92%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🐳</div>
+                <div class="skill-name">Docker/K8s</div>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 88%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">📊</div>
+                <div class="skill-name">Kafka</div>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 90%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">☁️</div>
+                <div class="skill-name">AWS/GCP</div>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 85%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🗄️</div>
+                <div class="skill-name">PostgreSQL</div>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 87%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">📈</div>
+                <div class="skill-name">Monitoring</div>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 83%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🔍</div>
+                <div class="skill-name">Elasticsearch</div>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 80%"></div>
+                </div>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🚀</div>
+                <div class="skill-name">GraphQL</div>
+                <div class="skill-level">
+                    <div class="skill-progress" style="width: 82%"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Проєкти -->
+    <section id="projects" class="fade-in">
+        <div class="section-container">
+            <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="project-icon">⚡</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Distributed ETL Pipeline</h3>
+                    <p class="project-description">Fault-tolerant Kafka-based ETL pipeline для обробки великих обсягів даних в реальному часі з orchestration across multiple data centers.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Kafka</span>
+                        <span class="tech-tag">C#</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Kubernetes</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <div class="project-icon">🚀</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">High-Throughput API System</h3>
+                    <p class="project-description">Масштабована система API для complex computations з low-latency обробкою real-time sports data.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">ASP.NET Core</span>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">GraphQL</span>
+                        <span class="tech-tag">AWS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <div class="project-icon">📊</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Monitoring & Analytics Platform</h3>
+                    <p class="project-description">Комплексна система моніторингу з використанням Elasticsearch для real-time analytics та візуалізації даних.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Elasticsearch</span>
+                        <span class="tech-tag">Grafana</span>
+                        <span class="tech-tag">DataDog</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                    <div class="project-icon">🔄</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Microservices Orchestra</h3>
+                    <p class="project-description">Система orchestration для управління мікросервісами з автоматичним масштабуванням та self-healing.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Kubernetes</span>
+                        <span class="tech-tag">Helm</span>
+                        <span class="tech-tag">Prometheus</span>
+                        <span class="tech-tag">Go</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                    <div class="project-icon">🔐</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Security Gateway</h3>
+                    <p class="project-description">API Gateway з вбудованою системою аутентифікації, rate limiting та threat detection.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Kong</span>
+                        <span class="tech-tag">OAuth2</span>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">TypeScript</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                    <div class="project-icon">💾</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Data Lake Architecture</h3>
+                    <p class="project-description">Побудова data lake для зберігання та обробки петабайтів структурованих та неструктурованих даних.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Hadoop</span>
+                        <span class="tech-tag">Spark</span>
+                        <span class="tech-tag">S3</span>
+                        <span class="tech-tag">Airflow</span>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакти -->
+    <section id="contact" class="fade-in">
+        <div class="section-container">
+            <h2 class="section-title">Contact Me</h2>
+        <div class="contact-container">
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Ім'я</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Тема</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Повідомлення</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Відправити</button>
+            </form>
+            <div class="social-links">
+                <a href="https://github.com" class="social-link" aria-label="GitHub">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/00-terletska/" class="social-link" aria-label="LinkedIn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="mailto:khrystynaterletska1@gmail.com" class="social-link" aria-label="Email">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M0 3v18h24v-18h-24zm6.623 7.929l-4.623 5.712v-9.458l4.623 3.746zm-4.141-5.929h19.035l-9.517 7.713-9.518-7.713zm5.694 7.188l3.824 3.099 3.83-3.104 5.612 6.817h-18.779l5.513-6.812zm9.208-1.264l4.616-3.741v9.348l-4.616-5.607z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Христина Терлецька. Всі права захищені.</p>
+    </footer>
+
+    <script>
+        // Мобільне меню
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Закриття меню при кліку на посилання
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Плавна прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Анімація при скролі
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Приховання навігації при прокрутці
+        let lastScroll = 0;
+        const nav = document.querySelector('nav');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                nav.style.transform = 'translateY(0)';
+                return;
+            }
+            
+            if (currentScroll > lastScroll && !navLinks.classList.contains('active')) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Обробка форми з mailto
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Отримуємо дані з форми
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Формуємо mailto посилання
+            const mailtoLink = `mailto:khrystynaterletska1@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+                `Ім'я: ${name}\nEmail: ${email}\n\nПовідомлення:\n${message}`
+            )}`;
+            
+            // Відкриваємо поштовий клієнт
+            window.location.href = mailtoLink;
+            
+            // Показуємо повідомлення користувачу
+            setTimeout(() => {
+                alert('Дякую! Ваш поштовий клієнт має відкритися з готовим листом.');
+                contactForm.reset();
+            }, 500);
+        });
+
+        // Enhanced counter animation with easing
+        const animateCounter = (counter) => {
+            const target = parseInt(counter.getAttribute('data-target'));
+            const duration = 2000; // 2 seconds
+            const start = performance.now();
+            const startValue = 0;
+
+            const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
+
+            const updateCounter = (currentTime) => {
+                const elapsed = currentTime - start;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                const easedProgress = easeOutQuart(progress);
+                const currentValue = Math.floor(startValue + (target - startValue) * easedProgress);
+                
+                counter.textContent = currentValue;
+                
+                // Add pulse effect during counting
+                if (progress < 1) {
+                    counter.classList.add('counting');
+                    setTimeout(() => counter.classList.remove('counting'), 100);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target;
+                }
+            };
+
+            requestAnimationFrame(updateCounter);
+        };
+
+        // Intersection Observer for triggering animations
+        const statsObserverOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Start counter animations with staggered delays
+                    const counters = entry.target.querySelectorAll('.stat-number');
+                    counters.forEach((counter, index) => {
+                        setTimeout(() => {
+                            animateCounter(counter);
+                        }, index * 200);
+                    });
+                    
+                    // Trigger stat items animation
+                    const statItems = entry.target.querySelectorAll('.stat-item');
+                    statItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.animationPlayState = 'running';
+                        }, index * 100);
+                    });
+                    
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, statsObserverOptions);
+
+        // Observe the stats section
+        const statsSection = document.querySelector('.stats-section');
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Add hover sound effect (optional)
+        document.querySelectorAll('.stat-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                // You can add a subtle sound effect here if desired
+                item.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Parallax effect for the stats section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const statsSection = document.querySelector('.stats-section');
+            if (statsSection) {
+                const rect = statsSection.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                if (isVisible) {
+                    const translateY = (scrolled - statsSection.offsetTop) * 0.1;
+                    statsSection.style.transform = `translateY(${translateY}px)`;
+                }
+            }
+        });
+
+        // Динамічний текст у hero
+        const subtitles = [
+            'Senior Backend Engineer | Distributed Systems',
+            'Building Scalable Solutions',
+            'Kafka | Kubernetes | Cloud Architecture',
+            'High-Performance Systems'
+        ];
+        let subtitleIndex = 0;
+        const subtitleElement = document.querySelector('.subtitle');
+
+        setInterval(() => {
+            subtitleIndex = (subtitleIndex + 1) % subtitles.length;
+            if (subtitleElement) {
+                subtitleElement.style.opacity = '0';
+                setTimeout(() => {
+                    subtitleElement.textContent = subtitles[subtitleIndex];
+                    subtitleElement.style.opacity = '1';
+                }, 500);
+            }
+        }, 4000);
+    </script>
+</body>
+</html>
